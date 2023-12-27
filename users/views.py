@@ -6,3 +6,6 @@ from django.http import HttpResponse,HttpResponseRedirect,HttpResponseForbidden,
 
 def index(request):
     return render(request,'index.html')
+
+def owner_register(request):
+    return render(request,'owner_register.html')
