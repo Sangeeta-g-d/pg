@@ -24,5 +24,7 @@ def owner_register(request):
             print("password is not matching")
             return render('owner_register')
         else:
-            obj = NewUser.objects.create(first_name=pg_name,email=email,contact_number=contact_number,address=address,)
+            obj = NewUser.objects.create(first_name=pg_name,email=email,contact_number=contact_number,address=address,landmark=landmark,city=city,state=state,country=country,username=username,password=password)
+            print("registration successful")
+            return redirect('/')
     return render(request,'owner_register.html')
