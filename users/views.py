@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.template import loader
 from django.http import HttpResponse,HttpResponseRedirect,HttpResponseForbidden,HttpResponseBadRequest
+from .models import NewUser
+from django.contrib.auth.hashers import make_password
 # Create your views here.
 
 
@@ -14,17 +16,23 @@ def owner_register(request):
         contact_number = request.POST.get('contact_number')
         address = request.POST.get('address')
         landmark = request.POST.get('landmark')
+        area = request.POST.get('area')
         city = request.POST.get('city')
         state = request.POST.get('state')
         country = request.POST.get('country')
         username = request.POST.get('username')
         password = request.POST.get('password')
+        print(password)
         password1 = request.POST.get('password1')
-        if password != password:
-            print("password is not matching")
-            return render('owner_register')
-        else:
-            obj = NewUser.objects.create(first_name=pg_name,email=email,contact_number=contact_number,address=address,landmark=landmark,city=city,state=state,country=country,username=username,password=password)
+        print(password1)
+        user_type = request.POST.get('user_type')
+        if password == password1:
+            passw = make_password(password)
+            obj = NewUser.objects.create(first_name=pg_name,email=email,contact_number=contact_number,address=address,landmark=landmark,city=city,state=state,country=country,username=username,password=passw,user_type=user_type)
             print("registration successful")
             return redirect('/')
+            
+        else:
+            print("password is not matching")
+            return redirect('owner_register')
     return render(request,'owner_register.html')
