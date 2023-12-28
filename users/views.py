@@ -36,3 +36,21 @@ def owner_register(request):
             print("password is not matching")
             return redirect('owner_register')
     return render(request,'owner_register.html')
+
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            if user.user_type == 'student' and user.payment_status:
+                login(request, user)
+                return redirect('dashboard', user.id)
+            elif user.user_type == 'student' and not user.payment_status:
+                messages.error(request, 'Please wait, your account needs to be verified.')
+            else:
+                messages.error(request, 'Invalid username or password.')
+        else:
+            messages.error(request, 'User not found.')  # Display "User not found" message here if the user is None.
+
+    return render(request, 'login.html')
