@@ -3,6 +3,7 @@ from django.template import loader
 from django.http import HttpResponse,HttpResponseRedirect,HttpResponseForbidden,HttpResponseBadRequest
 from .models import NewUser
 from django.contrib.auth.hashers import make_password
+from django.contrib.auth import authenticate,login,logout
 # Create your views here.
 
 
@@ -54,3 +55,30 @@ def login_view(request):
             messages.error(request, 'User not found.')  # Display "User not found" message here if the user is None.
 
     return render(request, 'login.html')
+
+
+def admin_login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        i = request.user.id
+        print("idddddddddddddd",i)
+        if user is not None and user.is_superuser:
+            login(request, user)
+            return redirect('admin_db')
+        elif user is not None and not user.is_superuser:
+            messages.error(request, 'invalid user')
+        else:
+            messages.error(request, 'Invalid username or password.')
+    return render(request, 'admin_login.html')
+
+def admin_db(request):
+    return render(request,'admin_db.html')
+
+def pg_list(request):
+    obj = NewUser.objects.filter(user_type='Owner')
+    context = {
+        'obj':obj,
+    }
+    return render(request,'pg_list.html',context)
