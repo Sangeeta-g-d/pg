@@ -28,7 +28,34 @@ https://templatemo.com/tm-569-edu-meeting
 
 -->
   </head>
+<style>
+    /* Style for the select dropdown */
+select {
+    padding: 10px; /* Adds some padding around the select */
+    font-size: 16px; /* Sets the font size */
+    border: 1px solid #f2f0f0;
+    background-color: #f2f0f0; /* Adds a border */
+    border-radius: 30px; /* Rounds the corners */
+    appearance: none; /* Removes default arrow icon */
+    background-image: linear-gradient(45deg, transparent 50%, #aaa 50%), linear-gradient(135deg, #aaa 50%, transparent 50%); /* Adds a custom arrow */
+    background-position: calc(100% - 20px) calc(1em + 2px), calc(100% - 15px) calc(1em + 2px); /* Positions the arrow */
+    background-size: 5px 5px; /* Sets size of the arrow */
+    background-repeat: no-repeat; /* Prevents arrow from repeating */
+}
 
+/* Style for select when it's focused */
+select:focus {
+    outline: none; /* Removes the default focus outline */
+    box-shadow: 0 0 5px rgba(81, 203, 238, 1); /* Adds a shadow when focused */
+}
+/* Target the select element within .col-lg-4 */
+.col-lg-4 select {
+    width: 100%; /* Set the width to 100% of its container */
+    padding: 10px; /* Optional: Add padding for better visual appearance */
+    /* Additional styles... */
+}
+
+</style>
 <body>
 
   <!-- Sub Header -->
@@ -49,6 +76,7 @@ https://templatemo.com/tm-569-edu-meeting
                 <div class="row">
                     <div class="col-lg-12">
                         <form id="contact"  method="post">
+                            {% csrf_token %}
                             <div class="row">
                                 <div class="col-lg-12">
                                     <h2>Register here</h2>
@@ -73,12 +101,17 @@ https://templatemo.com/tm-569-edu-meeting
                                         <input name="address" type="text" id="subject" placeholder="ADDRESS...*" required>
                                     </fieldset>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-lg-4">
                                     <fieldset>
                                         <input name="landmark" type="text" id="subject" placeholder="LANDMARK...*" required>
                                     </fieldset>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-lg-4">
+                                    <fieldset>
+                                        <input name="area" type="text" id="subject" placeholder="AREA...*" required>
+                                    </fieldset>
+                                </div>
+                                <div class="col-lg-4">
                                     <fieldset>
                                         <input name="city" type="text" id="subject" placeholder="CITY...*" required>
                                     </fieldset>
@@ -100,7 +133,7 @@ https://templatemo.com/tm-569-edu-meeting
                                     </fieldset>
                                 </div><div class="col-lg-4">
                                     <fieldset>
-                                        <input name="PASSWORD" type="password" id="subject" placeholder="PASSWORD...*" required>
+                                        <input name="password" type="password" id="subject" placeholder="PASSWORD...*" required>
                                     </fieldset>
                                 </div>
                                 <div class="col-lg-4">
@@ -108,12 +141,24 @@ https://templatemo.com/tm-569-edu-meeting
                                         <input name="password1" type="password" id="subject" placeholder="CONFIRM PASSWORD...*" required="">
                                     </fieldset>
                                 </div>
-                               
-                                <div class="col-lg-12">
+                                <div class="col-lg-4">
+                                    <fieldset>
+                                        <select name="user_type" id="subject">
+                                            <option value="">--select--</option>
+                                            <option value="Owner">Owner</option>
+                                            <option value="Tenant">Tenant</option>
+                                        </select>
+                                    </fieldset>
+                                </div> 
+                                <div class="col-lg-10">
+                                   
+                                </div>
+                                <br><div class="col-lg-12">
                                     <fieldset>
                                         <button type="submit" id="form-submit" class="button">REGISTER</button>
                                     </fieldset>
                                 </div>
+                                <p class="mt-2">Have an account ? <a href="/login">Login</a> </p>
                             </div>
                         </form>
                     </div>

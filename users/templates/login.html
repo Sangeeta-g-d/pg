@@ -28,6 +28,7 @@ https://templatemo.com/tm-569-edu-meeting
 
 -->
   </head>
+<<<<<<< HEAD
   <style>
     /* Add custom CSS styles */
     #form-submit {
@@ -38,6 +39,35 @@ https://templatemo.com/tm-569-edu-meeting
     .center-text {
         text-align: center;
     }
+=======
+<style>
+    /* Style for the select dropdown */
+select {
+    padding: 10px; /* Adds some padding around the select */
+    font-size: 16px; /* Sets the font size */
+    border: 1px solid #f2f0f0;
+    background-color: #f2f0f0; /* Adds a border */
+    border-radius: 30px; /* Rounds the corners */
+    appearance: none; /* Removes default arrow icon */
+    background-image: linear-gradient(45deg, transparent 50%, #aaa 50%), linear-gradient(135deg, #aaa 50%, transparent 50%); /* Adds a custom arrow */
+    background-position: calc(100% - 20px) calc(1em + 2px), calc(100% - 15px) calc(1em + 2px); /* Positions the arrow */
+    background-size: 5px 5px; /* Sets size of the arrow */
+    background-repeat: no-repeat; /* Prevents arrow from repeating */
+}
+
+/* Style for select when it's focused */
+select:focus {
+    outline: none; /* Removes the default focus outline */
+    box-shadow: 0 0 5px rgba(81, 203, 238, 1); /* Adds a shadow when focused */
+}
+/* Target the select element within .col-lg-4 */
+.col-lg-4 select {
+    width: 100%; /* Set the width to 100% of its container */
+    padding: 10px; /* Optional: Add padding for better visual appearance */
+    /* Additional styles... */
+}
+
+>>>>>>> 0a0a9f8841aa96474552755ca6d737919cdc7c20
 </style>
 <body>
 
@@ -55,14 +85,23 @@ https://templatemo.com/tm-569-edu-meeting
   <section class="contact-us" id="contact">
     <div class="container">
         <div class="row justify-content-center"> <!-- Add 'justify-content-center' class -->
+<<<<<<< HEAD
             <div class="col-lg-7"> <!-- Remove 'align-self-center' class -->
                 <div class="row">
                     <div class="col-lg-12">
                         <form id="contact"  method="post">
+=======
+            <div class="col-lg-5"> <!-- Remove 'align-self-center' class -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <form id="contact"  method="post">
+                            {% csrf_token %}
+>>>>>>> 0a0a9f8841aa96474552755ca6d737919cdc7c20
                             <div class="row">
                                 <div class="col-lg-12">
                                     <h2>Login</h2>
                                 </div>
+<<<<<<< HEAD
                                 <div class="col-lg-12">
                                     <fieldset>
                                         <input name="name" type="text" id="name" placeholder="USERNAME...*" required>
@@ -89,6 +128,29 @@ https://templatemo.com/tm-569-edu-meeting
                                   <a href="registration "> <p>Don't have an account? Register</p></a> 
                                    </div>
                                      
+=======
+                               
+                                
+                                
+                                <div class="col-lg-12">
+                                    <fieldset>
+                                        <input name="username" type="text" id="subject" placeholder="Username...*" required>
+                                    </fieldset>
+                                </div>
+                                <div class="col-lg-12">
+                                    <fieldset>
+                                        <input name="password" type="password" id="subject" placeholder="Password...*" required>
+                                    </fieldset>
+                                </div>
+                                
+                                
+                                <br><div class="col-lg-12">
+                                    <fieldset>
+                                        <button type="submit" id="form-submit" class="button">Login !</button>
+                                    </fieldset>
+                                </div> 
+                                <p class="mt-2">Don't have an account ? <a href="/owner_register">Register</a> </p>
+>>>>>>> 0a0a9f8841aa96474552755ca6d737919cdc7c20
                             </div>
                         </form>
                     </div>
