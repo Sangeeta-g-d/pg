@@ -7,6 +7,14 @@ from django.http import HttpResponse,HttpResponseRedirect,HttpResponseForbidden,
 def index(request):
     return render(request,'index.html')
 
+
+def registration(request):
+    return render(request,'registration.html')
+
+
+def login1(request):
+    return render(request,'login.html')
+
 def owner_register(request):
     if request.method == 'POST':
         pg_name = request.POST.get('name')
