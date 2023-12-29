@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Connect Plus</title>
+    <title>DwellEase</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="/static/assets1/vendors/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="/static/assets1/vendors/flag-icon-css/css/flag-icon.min.css">
@@ -19,7 +19,7 @@
     <!-- Layout styles -->
     <link rel="stylesheet" href="/static/assets1/css/style.css">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="/static/assets1/images/favicon.png" />
+    <link rel="shortcut icon" href="/images/favicon.png" />
   </head>
   <body>
     <div class="container-scroller">
@@ -153,8 +153,8 @@
                                   <td> {{x.contact_number}} </td>
                                   <td> {{x.address}} {{x.land_mark}} {{x.area}} </td>
                                   <td> {{x.city}} </td>
-                                  <td> {{x.status}} </td>
-                                  <td> <button class="btn btn-secondary">Approve</button> </td>
+                                  <td class="status-cell"> {{x.status}} </td>
+                                  <td> <button class="btn btn-secondary approve-btn" data-user-id="{{ x.id }}">Approve</button></td>
                                 </tr>
                                 {% endfor %}
                               </tbody>
@@ -169,6 +169,38 @@
               </div>
             </div>
           </div>
+          <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".approve-btn").on("click", function () {
+            var userId = $(this).data("user-id");
+            var button = $(this); // Reference to the clicked button
+            
+            // Send an AJAX request to update the user status
+            $.ajax({
+                type: "POST",
+                url: "{% url 'update_status' %}",
+                data: {
+                    'user_id': userId,
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                success: function (response) {
+                    // Update the UI or perform any action upon success
+                    console.log("Status updated successfully!");
+                    button.prop('disabled', true); // Disable the button after approval
+                    button.text('Approved'); // Optionally change the button text
+                    // Assuming response includes updated status, update the UI
+                    button.closest('tr').find('.status-cell').text('True'); // Update status cell value
+                },
+                error: function (error) {
+                    console.log("Error occurred:", error);
+                }
+            });
+        });
+    });
+</script>
+
+
           <!-- content-wrapper ends -->
           <!-- partial:partials/_footer.html -->
           <footer class="footer">
